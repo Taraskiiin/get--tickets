@@ -1,13 +1,13 @@
 import React from 'react';
 
 import Ticket from './Ticket';
-import logo from '../assets/logoForAPC.png';
 
 const TicketBoard = () => {
+  const logo = process.env.PUBLIC_URL + '/logoForAPC.png';
   const mockedTickets = [
     {
       price: 13400,
-      logo: logo,
+      logo,
       rows: [
         { from: 'MOW', to: 'HKT', arrivesAt: '8:00', departsAt: '10:45' },
         {
@@ -20,7 +20,7 @@ const TicketBoard = () => {
     },
     {
       price: 13400,
-      logo: logo,
+      logo,
       rows: [
         { from: 'MOW', to: 'HKT', arrivesAt: '8:00', departsAt: '10:45' },
         {
