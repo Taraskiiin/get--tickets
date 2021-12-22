@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import styled from "styled-components";
+import {
+  NumberOfTransplantsBlock,
+  TitleNumberOfTransplantsBlock,
+} from '../styles/NumberOfTransplants';
 
 const NumberOfTransplants = () => {
   const [checkAll, setCheckAll] = useState<boolean>(false);
@@ -39,23 +42,5 @@ const NumberOfTransplants = () => {
     </NumberOfTransplantsBlock>
   );
 };
-
-const NumberOfTransplantsBlock = styled.div`
-  height: 250px;
-  display: flex;
-  padding: 20px;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: start;
-  background-color: #fff;
-  border-radius: 10px;
-  font-size: 14px;
-`;
-
-const TitleNumberOfTransplantsBlock = styled.h3`
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 14px;
-`;
 
 export default NumberOfTransplants;

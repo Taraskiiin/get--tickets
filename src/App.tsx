@@ -1,41 +1,27 @@
-import React from "react";
+import React from 'react';
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { ThemeProvider } from 'styled-components';
 
-import Filter from "./components/Filter/Filter";
-import Logo from "./components/Logo/Logo";
-import NumberOfTransplants from "./components/NumberOfTransplants/NumberOfTransplants";
-import TicketBoard from "./components/TicketBoard/TicketBoard";
+import { Filter, Logo, TicketBoard, NumberOfTransplants } from './components';
 
-import "./styles/index.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./styles/reset.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Reset } from 'styled-reset';
 
-function App() {
-  return (
-    <Container
-      style={{
-        backgroundColor: "#f3f7fa",
-        paddingLeft: 100,
-        paddingRight: 100,
-        paddingTop: 50,
-      }}
-    >
-      <Row
-        style={{
-          width: "15%",
-          margin: "0 auto",
-        }}
-      >
+import { GlobalStyle } from './styles/GlobalStyle';
+import { theme } from './styles/theme';
+
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <Container>
+      <Reset />
+      <GlobalStyle />
+      <Row>
         <Logo />
       </Row>
-      <Row
-        style={{
-          marginTop: 50,
-        }}
-      >
+      <Row>
         <Col sm={3}>
           <NumberOfTransplants />
         </Col>
@@ -45,7 +31,7 @@ function App() {
         </Col>
       </Row>
     </Container>
-  );
-}
+  </ThemeProvider>
+);
 
 export default App;
