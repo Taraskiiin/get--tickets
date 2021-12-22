@@ -1,43 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-import Ticket from './Ticket';
+import Ticket, { ITicket } from './Ticket';
 
-const TicketBoard = () => {
-  const logo = process.env.PUBLIC_URL + '/logoForAPC.png';
-  const mockedTickets = [
-    {
-      price: 13400,
-      logo,
-      rows: [
-        { from: 'MOW', to: 'HKT', arrivesAt: '8:00', departsAt: '10:45' },
-        {
-          from: 'MOW',
-          to: 'HKT',
-          arrivesAt: '8:00',
-          departsAt: '10:45',
-        },
-      ],
-    },
-    {
-      price: 13400,
-      logo,
-      rows: [
-        { from: 'MOW', to: 'HKT', arrivesAt: '8:00', departsAt: '10:45' },
-        {
-          from: 'MOW',
-          to: 'HKT',
-          arrivesAt: '8:00',
-          departsAt: '10:45',
-        },
-      ],
-    },
-  ];
+const TicketBoard: React.FC = () => {
+  const [data, setData] = useState<ITicket[]>();
 
+  useEffect(() => {
+    async function loadData() {
+      const response = await axios.get(
+        'https://front-test.beta.aviasales.ru/tickets?searchId=2sg3h'
+      );
+      setData(response.data.tickets);
+    }
+    loadData();
+  }, []);
+  console.log(data);
   return (
     <div>
-      {mockedTickets.map((ticket, index) => (
-        <Ticket ticket={ticket} key={index} />
-      ))}
+      {data ? data.map((el, index) => <Ticket key={index} {...el} />) : null}
     </div>
   );
 };

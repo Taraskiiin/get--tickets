@@ -6,7 +6,7 @@ export const Card = styled.div`
   border-radius: ${(props) => props.theme.borderRadius};
   padding: 25px 50px 25px 20px;
   text-transform: uppercase;
-  font-size: ${(props) => props.theme.fontSizes.s};
+  font-size: ${(props) => props.theme.fontSizes.m};
   margin-bottom: 20px;
   color: ${(props) => props.theme.colors.codGray};
   box-shadow: 3px 3px 2px 1px ${(props) => props.theme.colors.athensGray};
@@ -16,7 +16,7 @@ export const Header = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   align-items: center;
-  font-size: ${(props) => props.theme.fontSizes.s};
+  font-size: ${(props) => props.theme.fontSizes.m};
   margin-bottom: 10px;
 `;
 
