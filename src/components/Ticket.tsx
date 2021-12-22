@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import moment from 'moment';
 
+import { getTime } from '../helpers/getTime';
+
 import {
   Card,
   Header,
@@ -44,7 +46,7 @@ const Ticket: React.FC<ITicket> = (ticket: ITicket) => {
                 </ColumnInfo>
                 <ColumnInfo>
                   <ColumnInfoTitle>В Пути</ColumnInfoTitle>
-                  <ColumnInfoTime>{segment.duration}</ColumnInfoTime>
+                  <ColumnInfoTime>{getTime(segment.duration)}</ColumnInfoTime>
                 </ColumnInfo>
                 <ColumnInfo>
                   {segment.stops.length ? (
