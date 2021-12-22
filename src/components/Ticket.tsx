@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import moment from 'moment';
 
 import {
   Card,
@@ -8,6 +9,7 @@ import {
   ColumnInfoTitle,
   ColumnInfoTime,
   Content,
+  Carrier,
 } from '../styles/Ticket';
 
 interface ISegments {
@@ -28,7 +30,7 @@ const Ticket: React.FC<ITicket> = (ticket: ITicket) => {
     <Card>
       <Header>
         <Price>{ticket.price}&nbsp;P</Price>
-        {/* <img src={ticket.logo} alt="logo" /> */}
+        <Carrier>{ticket.carrier}</Carrier>
       </Header>
       <Content>
         {ticket.segments.length
@@ -38,14 +40,16 @@ const Ticket: React.FC<ITicket> = (ticket: ITicket) => {
                   <ColumnInfoTitle>
                     {segment.origin} - {segment.destination}
                   </ColumnInfoTitle>
-                  <span>{segment.date}</span>
+                  <span>{moment(segment.date).format('MMM Do YY, h:mm')}</span>
                 </ColumnInfo>
                 <ColumnInfo>
                   <ColumnInfoTitle>В Пути</ColumnInfoTitle>
                   <ColumnInfoTime>{segment.duration}</ColumnInfoTime>
                 </ColumnInfo>
                 <ColumnInfo>
-                  <ColumnInfoTitle>Пересадки</ColumnInfoTitle>
+                  {segment.stops.length ? (
+                    <ColumnInfoTitle>Пересадки</ColumnInfoTitle>
+                  ) : null}
                   {segment.stops.length
                     ? segment.stops.map((stop, index) => (
                         <span key={index}>{stop}&nbsp;</span>

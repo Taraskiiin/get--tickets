@@ -8,8 +8,11 @@ const TicketBoard: React.FC = () => {
 
   useEffect(() => {
     async function loadData() {
+      const searchId = await axios.get(
+        'https://front-test.beta.aviasales.ru/search'
+      );
       const response = await axios.get(
-        'https://front-test.beta.aviasales.ru/tickets?searchId=2sg3h'
+        `https://front-test.beta.aviasales.ru/tickets?searchId=${searchId.data.searchId}`
       );
       setData(response.data.tickets);
     }

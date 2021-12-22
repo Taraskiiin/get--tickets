@@ -44,3 +44,8 @@ export const Price = styled.span`
   font-size: ${(props) => props.theme.fontSizes.l};
   color: ${(props) => props.theme.colors.dodgerBlue};
 `;
+
+export const Carrier = styled.span`
+  font-size: ${(props) => props.theme.fontSizes.l};
+  color: ${(props) => props.theme.colors.codGray};
+`;
