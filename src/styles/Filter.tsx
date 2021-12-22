@@ -8,8 +8,8 @@ export const Nav = styled(ButtonGroup)`
   justify-content: space-between;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-radius: 10px;
-  background-color: #fff;
+  border-radius: ${(props) => props.theme.borderRadius};
+  background-color: ${(props) => props.theme.colors.white};
   margin-bottom: 20px;
 `;
 
@@ -17,18 +17,22 @@ export const StyledButton = styled(Button)`
   text-decoration: none;
   text-align: center;
   padding: 14px 0;
-  font-size: 14px;
-  color: #4a4a4a;
-  background-color: #fff;
-  border: 1px solid #333333;
+  font-size: ${(props) => props.theme.fontSizes.m};
+  color: ${(props) => props.theme.colors.codGray};
+  background-color: ${(props) => props.theme.colors.white};
+  border: none;
+  text-transform: uppercase;
+  box-shadow: 3px 3px 2px 1px ${(props) => props.theme.colors.athensGray};
 
   &:hover {
-    color: #fff;
-    background-color: #2196f3;
+    color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.dodgerBlue};
+    box-shadow: 1px 4px ${(props) => props.theme.colors.athensGray};
   }
 
   &:active {
-    color: #fff;
-    background-color: #2196f3;
+    color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.dodgerBlue};
+    box-shadow: 1px 4px ${(props) => props.theme.colors.athensGray};
   }
 `;

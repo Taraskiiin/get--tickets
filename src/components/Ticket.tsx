@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import {
   Card,
@@ -31,8 +31,8 @@ const Ticket: React.FC<ITicket> = ({ ticket }) => {
         <img src={ticket.logo} alt="logo" />
       </Header>
       <Content>
-        {ticket.rows.map((row) => (
-          <>
+        {ticket.rows.map((row, index) => (
+          <Fragment key={index}>
             <ColumnInfo>
               <ColumnInfoTitle>
                 {row.from} - {row.to}
@@ -54,7 +54,7 @@ const Ticket: React.FC<ITicket> = ({ ticket }) => {
               </ColumnInfoTitle>
               <span>hkg, jnb</span>
             </ColumnInfo>
-          </>
+          </Fragment>
         ))}
       </Content>
     </Card>

@@ -1,20 +1,22 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.white};
   height: max-content;
-  border-radius: 10px;
+  border-radius: ${(props) => props.theme.borderRadius};
   padding: 25px 50px 25px 20px;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.fontSizes.s};
   margin-bottom: 20px;
+  color: ${(props) => props.theme.colors.codGray};
+  box-shadow: 3px 3px 2px 1px ${(props) => props.theme.colors.athensGray};
 `;
 
 export const Header = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   align-items: center;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.fontSizes.s};
   margin-bottom: 10px;
 `;
 
@@ -31,7 +33,7 @@ export const ColumnInfo = styled.p`
 `;
 
 export const ColumnInfoTitle = styled.span`
-  color: #a0b0b9;
+  color: ${(props) => props.theme.colors.gullGray};
 `;
 
 export const ColumnInfoTime = styled.span`
@@ -39,6 +41,6 @@ export const ColumnInfoTime = styled.span`
 `;
 
 export const Price = styled.span`
-  font-size: 18px;
-  color: #2196f3;
+  font-size: ${(props) => props.theme.fontSizes.l};
+  color: ${(props) => props.theme.colors.dodgerBlue};
 `;
