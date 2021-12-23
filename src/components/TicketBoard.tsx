@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import Ticket, { ITicket } from './Ticket';
+import { sortByPrice } from '../helpers/sortByPrice';
 
 const TicketBoard: React.FC = () => {
   const [data, setData] = useState<ITicket[]>();
@@ -18,7 +19,7 @@ const TicketBoard: React.FC = () => {
     }
     loadData();
   }, []);
-  console.log(data);
+
   return (
     <div>
       {data ? data.map((el, index) => <Ticket key={index} {...el} />) : null}

@@ -7,4 +7,7 @@ export const NavLink = styled.a`
     max-width: 150px;
     height: 100%;
   }
+  @media ${(props) => props.theme.device.tablet} {
+    width: 35%;
+  }
 `;
