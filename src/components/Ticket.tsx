@@ -1,4 +1,7 @@
 import React, { Fragment } from 'react';
+import moment from 'moment';
+
+import { getTime } from '../helpers/getTime';
 
 import {
   Card,
@@ -8,54 +11,56 @@ import {
   ColumnInfoTitle,
   ColumnInfoTime,
   Content,
+  Carrier,
 } from '../styles/Ticket';
 
+interface ISegments {
+  date: string;
+  destination: string;
+  duration: number;
+  origin: string;
+  stops: string[];
+}
 export interface ITicket {
-  ticket: {
-    price: number;
-    logo: string;
-    rows: {
-      from: string;
-      to: string;
-      arrivesAt: string;
-      departsAt: string;
-    }[];
-  };
+  carrier: string;
+  price: number;
+  segments: ISegments[];
 }
 
-const Ticket: React.FC<ITicket> = ({ ticket }) => {
+const Ticket: React.FC<ITicket> = (ticket: ITicket) => {
   return (
     <Card>
       <Header>
         <Price>{ticket.price}&nbsp;P</Price>
-        <img src={ticket.logo} alt="logo" />
+        <Carrier>{ticket.carrier}</Carrier>
       </Header>
       <Content>
-        {ticket.rows.map((row, index) => (
-          <Fragment key={index}>
-            <ColumnInfo>
-              <ColumnInfoTitle>
-                {row.from} - {row.to}
-              </ColumnInfoTitle>
-              <span>
-                {row.departsAt} - {row.arrivesAt}
-              </span>
-            </ColumnInfo>
-            <ColumnInfo>
-              <ColumnInfoTitle>В Пути</ColumnInfoTitle>
-              <ColumnInfoTime>
-                {/**TODO: add function thst calculates time of the trip */}21ч
-                15м
-              </ColumnInfoTime>
-            </ColumnInfo>
-            <ColumnInfo>
-              <ColumnInfoTitle>
-                Пересадки{/**TODO: add count of transplantation */}{' '}
-              </ColumnInfoTitle>
-              <span>hkg, jnb</span>
-            </ColumnInfo>
-          </Fragment>
-        ))}
+        {ticket.segments.length
+          ? ticket.segments.map((segment, index) => (
+              <Fragment key={index}>
+                <ColumnInfo>
+                  <ColumnInfoTitle>
+                    {segment.origin} - {segment.destination}
+                  </ColumnInfoTitle>
+                  <span>{moment(segment.date).format('MMM Do YY, h:mm')}</span>
+                </ColumnInfo>
+                <ColumnInfo>
+                  <ColumnInfoTitle>В Пути</ColumnInfoTitle>
+                  <ColumnInfoTime>{getTime(segment.duration)}</ColumnInfoTime>
+                </ColumnInfo>
+                <ColumnInfo>
+                  {segment.stops.length ? (
+                    <ColumnInfoTitle>Пересадки</ColumnInfoTitle>
+                  ) : null}
+                  {segment.stops.length
+                    ? segment.stops.map((stop, index) => (
+                        <span key={index}>{stop}&nbsp;</span>
+                      ))
+                    : null}
+                </ColumnInfo>
+              </Fragment>
+            ))
+          : null}
       </Content>
     </Card>
   );
