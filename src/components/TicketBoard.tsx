@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import Ticket, { ITicket } from './Ticket';
-import { sortByPrice } from '../helpers/sortByPrice';
 
 const TicketBoard: React.FC = () => {
   const [data, setData] = useState<ITicket[]>();
