@@ -27,43 +27,41 @@ export interface ITicket {
   segments: ISegments[];
 }
 
-const Ticket: React.FC<ITicket> = (ticket: ITicket) => {
-  return (
-    <Card>
-      <Header>
-        <Price>{ticket.price}&nbsp;P</Price>
-        <Carrier>{ticket.carrier}</Carrier>
-      </Header>
-      <Content>
-        {ticket.segments.length
-          ? ticket.segments.map((segment, index) => (
-              <Fragment key={index}>
-                <ColumnInfo>
-                  <ColumnInfoTitle>
-                    {segment.origin} - {segment.destination}
-                  </ColumnInfoTitle>
-                  <span>{moment(segment.date).format('MMM Do YY, h:mm')}</span>
-                </ColumnInfo>
-                <ColumnInfo>
-                  <ColumnInfoTitle>В Пути</ColumnInfoTitle>
-                  <ColumnInfoTime>{getTime(segment.duration)}</ColumnInfoTime>
-                </ColumnInfo>
-                <ColumnInfo>
-                  {segment.stops.length ? (
-                    <ColumnInfoTitle>Пересадки</ColumnInfoTitle>
-                  ) : null}
-                  {segment.stops.length
-                    ? segment.stops.map((stop, index) => (
-                        <span key={index}>{stop}&nbsp;</span>
-                      ))
-                    : null}
-                </ColumnInfo>
-              </Fragment>
-            ))
-          : null}
-      </Content>
-    </Card>
-  );
-};
+const Ticket: React.FC<ITicket> = (ticket) => (
+  <Card>
+    <Header>
+      <Price>{ticket.price}&nbsp;P</Price>
+      <Carrier>{ticket.carrier}</Carrier>
+    </Header>
+    <Content>
+      {ticket.segments.length
+        ? ticket.segments.map((segment, index) => (
+            <Fragment key={index}>
+              <ColumnInfo>
+                <ColumnInfoTitle>
+                  {segment.origin} - {segment.destination}
+                </ColumnInfoTitle>
+                <span>{moment(segment.date).format('MMM Do YY, h:mm')}</span>
+              </ColumnInfo>
+              <ColumnInfo>
+                <ColumnInfoTitle>В Пути</ColumnInfoTitle>
+                <ColumnInfoTime>{getTime(segment.duration)}</ColumnInfoTime>
+              </ColumnInfo>
+              <ColumnInfo>
+                {segment.stops.length ? (
+                  <ColumnInfoTitle>Пересадки</ColumnInfoTitle>
+                ) : null}
+                {segment.stops.length
+                  ? segment.stops.map((stop, index) => (
+                      <span key={index}>{stop}&nbsp;</span>
+                    ))
+                  : null}
+              </ColumnInfo>
+            </Fragment>
+          ))
+        : null}
+    </Content>
+  </Card>
+);
 
 export default Ticket;

@@ -16,7 +16,6 @@ const NumberOfTransplants = () => {
     choosedOption: {},
   });
 
-  console.log(selectOption);
   return (
     <NumberOfTransplantsBlock>
       <TitleNumberOfTransplantsBlock>

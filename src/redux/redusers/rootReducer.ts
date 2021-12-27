@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import stopsFilter from './stopsFilter';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import getTickets from './getTickets';
+// import stopsFilter from './stopsFilter';
+import ticketsReducer from './ticketsReducer';
+import searchIdReducer from './searchIdReducer';
 
 export default combineReducers({
-  stopsFilter,
+  // stopsFilter,
+  searchIdReducer,
+  ticketsReducer,
 });

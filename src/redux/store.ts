@@ -1,8 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './redusers/rootReducer';
+import createSagaMiddleware from 'redux-saga';
+import { rootWatcher } from './saga';
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
-  const store = createStore(rootReducer, applyMiddleware());
-  return store;
-};
+const sagaMiddleware = createSagaMiddleware();
+export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(rootWatcher);

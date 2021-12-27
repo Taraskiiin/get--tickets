@@ -1,27 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
 
 import Ticket, { ITicket } from './Ticket';
+import { fetchSearchIdCreator } from '../redux/redusers/searchIdReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTicketsCreator } from '../redux/redusers/ticketsReducer';
 
 const TicketBoard: React.FC = () => {
-  const [data, setData] = useState<ITicket[]>();
-
+  const dispatch = useDispatch();
+  const searchId = useSelector(
+    (store: { searchIdReducer: { searchId: string } }) =>
+      store.searchIdReducer.searchId
+  );
+  const tickets = useSelector(
+    (store: { ticketsReducer: { tickets: ITicket[] } }) =>
+      store.ticketsReducer.tickets.flat()
+  );
   useEffect(() => {
-    async function loadData() {
-      const searchId = await axios.get(
-        'https://front-test.beta.aviasales.ru/search'
-      );
-      const response = await axios.get(
-        `https://front-test.beta.aviasales.ru/tickets?searchId=${searchId.data.searchId}`
-      );
-      setData(response.data.tickets);
-    }
-    loadData();
-  }, []);
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    searchId ? null : dispatch(fetchSearchIdCreator());
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    searchId ? dispatch(fetchTicketsCreator()) : null;
+  }, [dispatch, searchId]);
   return (
     <div>
-      {data ? data.map((el, index) => <Ticket key={index} {...el} />) : null}
+      {tickets.length
+        ? tickets.map((ticket, index) => <Ticket key={index} {...ticket} />)
+        : null}
     </div>
   );
 };
