@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Form } from 'formik';
 
 export const NumberOfTransplantsBlock = styled.div`
   height: max-content;
@@ -13,12 +14,10 @@ export const NumberOfTransplantsBlock = styled.div`
   margin-bottom: 20px;
   box-shadow: 3px 3px 2px 1px ${(props) => props.theme.colors.athensGray};
 
-  > label {
-    width: max-content;
-  }
+}
   @media ${(props) => props.theme.device.tablet} {
     font-size: ${(props) => props.theme.fontSizes.s};
-    padding: 20px 10px;
+    padding: 10px;
   }
   @media ${(props) => props.theme.device.mobileL} {
     font-size: ${(props) => props.theme.fontSizes.m};
@@ -31,4 +30,13 @@ export const TitleNumberOfTransplantsBlock = styled.h3`
   font-weight: normal;
   line-height: 10px;
   margin-bottom: 20px;
+`;
+
+export const FormStyled = styled(Form)`
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  > label {
+    width: max-content;
+  }
 `;
