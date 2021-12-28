@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Field } from 'formik';
 
 import {
@@ -7,15 +7,18 @@ import {
   FormStyled,
 } from '../styles/NumberOfTransplants';
 
-const NumberOfTransplants = () => {
-  const [selectOption, setSelectOption] = useState<{
-    selectAll: boolean;
-    choosedOption: {};
-  }>({
-    selectAll: false,
-    choosedOption: {},
-  });
+import { useDispatch, useSelector } from 'react-redux';
+import { ActionCreators } from '../duck/index';
 
+const NumberOfTransplants = () => {
+  const dispatch = useDispatch();
+  const stops = useSelector(
+    (store: {
+      stopsFilterReducer: {
+        stops: { selectAll: boolean; choosedOption: {} };
+      };
+    }) => store.stopsFilterReducer.stops
+  );
   return (
     <NumberOfTransplantsBlock>
       <TitleNumberOfTransplantsBlock>
@@ -23,15 +26,11 @@ const NumberOfTransplants = () => {
       </TitleNumberOfTransplantsBlock>
       <Formik
         initialValues={{
-          selectAll: false,
-          choosedOption: {} || false,
+          selectAll: stops.selectAll,
+          choosedOption: stops.choosedOption,
         }}
-        onSubmit={async (values: { selectAll: boolean; choosedOption: {} }) => {
-          setSelectOption({
-            ...selectOption,
-            selectAll: values.selectAll,
-            choosedOption: values.choosedOption,
-          });
+        onSubmit={(values: { selectAll: boolean; choosedOption: {} }) => {
+          dispatch(ActionCreators.stopFilterUpdateCreator(values));
         }}
       >
         <FormStyled>
