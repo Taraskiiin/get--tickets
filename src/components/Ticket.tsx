@@ -34,7 +34,7 @@ const Ticket: React.FC<ITicket> = (ticket) => (
       <Carrier>{ticket.carrier}</Carrier>
     </Header>
     <Content>
-      {ticket.segments.length
+      {ticket.segments?.length > 0
         ? ticket.segments.map((segment, index) => (
             <Fragment key={index}>
               <ColumnInfo>
@@ -48,10 +48,10 @@ const Ticket: React.FC<ITicket> = (ticket) => (
                 <ColumnInfoTime>{getTime(segment.duration)}</ColumnInfoTime>
               </ColumnInfo>
               <ColumnInfo>
-                {segment.stops.length ? (
+                {segment.stops.length > 0 ? (
                   <ColumnInfoTitle>Пересадки</ColumnInfoTitle>
                 ) : null}
-                {segment.stops.length
+                {segment.stops.length > 0
                   ? segment.stops.map((stop, index) => (
                       <span key={index}>{stop}&nbsp;</span>
                     ))
