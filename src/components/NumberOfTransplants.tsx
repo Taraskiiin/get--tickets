@@ -8,17 +8,21 @@ import {
 } from '../styles/NumberOfTransplants';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { ActionCreators } from '../duck/index';
+import actionCreators from '../duck/StopsSort/action-creators';
 
 const NumberOfTransplants = () => {
   const dispatch = useDispatch();
   const stops = useSelector(
     (store: {
-      stopsFilterReducer: {
-        stops: { selectAll: boolean; choosedOption: {} };
+      stopsSortReducer: {
+        stops: {
+          selectAll: boolean;
+          choosedOption: {};
+        };
       };
-    }) => store.stopsFilterReducer.stops
+    }) => store.stopsSortReducer.stops
   );
+
   return (
     <NumberOfTransplantsBlock>
       <TitleNumberOfTransplantsBlock>
@@ -30,7 +34,7 @@ const NumberOfTransplants = () => {
           choosedOption: stops.choosedOption,
         }}
         onSubmit={(values: { selectAll: boolean; choosedOption: {} }) => {
-          dispatch(ActionCreators.stopFilterUpdateCreator(values));
+          dispatch(actionCreators.stopSortUpdateCreator(values));
         }}
       >
         <FormStyled>
