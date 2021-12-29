@@ -23,12 +23,12 @@ const TicketBoard: React.FC = () => {
   );
 
   useEffect(() => {
-    if (stop === false) {
+    if (stop !== true) {
       searchId === ''
         ? dispatch(searchIdActionCreators.fetchSearchIdCreator())
         : dispatch(ticketsActionCreators.fetchTicketsCreator());
     }
-  }, [searchId]);
+  }, [dispatch, searchId, stop]);
 
   return (
     <div>

@@ -6,7 +6,7 @@ const stopsSortReducer = (
     type: string;
     payload: {
       selectAll: boolean;
-      choosedOption: string;
+      choosedOption: {};
     };
   }
 ) => {
@@ -18,8 +18,10 @@ const stopsSortReducer = (
       };
     case types.UPDATE_STOPS: {
       return {
-        ...state,
-        stops: action.payload,
+        stops: {
+          selectAll: action.payload.selectAll,
+          choosedOption: action.payload.choosedOption,
+        },
       };
     }
     default:
