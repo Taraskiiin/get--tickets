@@ -1,16 +1,16 @@
 import types from './types';
 
-const filterByPriceCreator = () => ({
+const sortByPriceCreator = () => ({
   type: types.SET_FILTER_BY_PRICE,
 });
 
-const filterByTimeCreator = () => ({
+const sortByTimeCreator = () => ({
   type: types.SET_FILTER_BY_TIME,
 });
 
 const actionsCreators = {
-  filterByPriceCreator,
-  filterByTimeCreator,
+  sortByPriceCreator,
+  sortByTimeCreator,
 };
 
 export default actionsCreators;

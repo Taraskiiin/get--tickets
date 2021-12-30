@@ -16,14 +16,13 @@ const stopsSortReducer = (
         ...state,
         stops: action.payload,
       };
-    case types.UPDATE_STOPS: {
+    case types.UPDATE_STOPS:
       return {
         stops: {
           selectAll: action.payload.selectAll,
           choosedOption: action.payload.choosedOption,
         },
       };
-    }
     default:
       return state;
   }

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import stopsSortReducer from './StopsSort/redusers';
-import searchIdReducer from './SearchId/redusers';
+import stopsSortReducer from './StopsSort/reducers';
+import searchIdReducer from './SearchId/reducers';
 import ticketsReducer from './Tickets/reducers';
-import timeOrPriceReducer from './Tickets/reducers';
+import timeOrPriceReducer from './TimeOrPriseSort/reducers';
 
 const reducers = combineReducers({
   stopsSortReducer,

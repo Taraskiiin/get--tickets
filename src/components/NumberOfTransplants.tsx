@@ -22,7 +22,6 @@ const NumberOfTransplants = () => {
       };
     }) => store.stopsSortReducer.stops
   );
-
   return (
     <NumberOfTransplantsBlock>
       <TitleNumberOfTransplantsBlock>
