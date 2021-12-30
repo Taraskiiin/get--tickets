@@ -8,6 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 const TicketBoard: React.FC = () => {
   const dispatch = useDispatch();
 
+  const sortByPrice = useSelector(
+    (store: {
+      timeOrPriceReducer: { sortByPrice: boolean; sortByTime: boolean };
+    }) => store.timeOrPriceReducer.sortByPrice
+  );
+
   const searchId = useSelector(
     (store: { searchIdReducer: { searchId: string } }) =>
       store.searchIdReducer.searchId
@@ -17,18 +23,28 @@ const TicketBoard: React.FC = () => {
     (store: { ticketsReducer: { tickets: ITicket[]; stop: boolean } }) =>
       store.ticketsReducer.tickets
   );
+
   const stop = useSelector(
     (store: { ticketsReducer: { tickets: ITicket[]; stop: boolean } }) =>
       store.ticketsReducer.stop
   );
 
   useEffect(() => {
-    if (stop === false) {
+    if (stop !== true) {
       searchId === ''
         ? dispatch(searchIdActionCreators.fetchSearchIdCreator())
         : dispatch(ticketsActionCreators.fetchTicketsCreator());
     }
-  }, [searchId]);
+  }, [dispatch, searchId, stop]);
+
+  sortByPrice
+    ? tickets?.sort((a: ITicket, b: ITicket) => a.price - b.price)
+    : tickets?.sort(
+        (a: ITicket, b: ITicket) =>
+          a.segments[0].duration +
+          a.segments[1].duration -
+          (b.segments[0].duration + b.segments[1].duration)
+      );
 
   return (
     <div>

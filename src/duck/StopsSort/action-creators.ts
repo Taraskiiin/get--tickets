@@ -8,7 +8,7 @@ const stopSortUpdateCreator = (payload: {
   selectAll: boolean;
   choosedOption: {};
 }) => ({
-  type: types.SET_STOPS,
+  type: types.UPDATE_STOPS,
   payload,
 });
 
