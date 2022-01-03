@@ -1,4 +1,4 @@
 import { ITicket } from '../components/Ticket';
 
-export const sortByPrice = (data: ITicket[]) =>
-  data ? data.sort((a: ITicket, b: ITicket) => b.price - a.price) : [];
+export const sortByPrice = (tickets: ITicket[]) =>
+  tickets?.sort((a: ITicket, b: ITicket) => a.price - b.price);

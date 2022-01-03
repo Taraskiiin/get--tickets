@@ -4,10 +4,25 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './duck/store';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={<Navigate to="get--tickets/?SortByPrice=true" />}
+          />
+        </Routes>
+        <App />
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

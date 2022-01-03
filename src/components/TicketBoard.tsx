@@ -5,14 +5,17 @@ import searchIdActionCreators from '../duck/SearchId/action-creators';
 import ticketsActionCreators from '../duck/Tickets/action-creators';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useQueryParams } from '../hooks/useQueryParams';
+
+import { sortByPrice } from '../helpers/sortByPrice';
+import { sortByTime } from '../helpers/sortByTime';
+
 const TicketBoard: React.FC = () => {
   const dispatch = useDispatch();
 
-  const sortByPrice = useSelector(
-    (store: {
-      timeOrPriceReducer: { sortByPrice: boolean; sortByTime: boolean };
-    }) => store.timeOrPriceReducer.sortByPrice
-  );
+  const queryParams = useQueryParams();
+  const querySortByPrice = queryParams.get('SortByPrice');
+  const querySortByTime = queryParams.get('SortByTime');
 
   const searchId = useSelector(
     (store: { searchIdReducer: { searchId: string } }) =>
@@ -37,14 +40,11 @@ const TicketBoard: React.FC = () => {
     }
   }, [dispatch, searchId, stop]);
 
-  sortByPrice
-    ? tickets?.sort((a: ITicket, b: ITicket) => a.price - b.price)
-    : tickets?.sort(
-        (a: ITicket, b: ITicket) =>
-          a.segments[0].duration +
-          a.segments[1].duration -
-          (b.segments[0].duration + b.segments[1].duration)
-      );
+  if (querySortByPrice) {
+    sortByPrice(tickets);
+  } else if (querySortByTime) {
+    sortByTime(tickets);
+  }
 
   return (
     <div>
