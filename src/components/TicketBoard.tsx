@@ -5,13 +5,28 @@ import searchIdActionCreators from '../duck/SearchId/action-creators';
 import ticketsActionCreators from '../duck/Tickets/action-creators';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useQueryParams } from '../hooks/useQueryParams';
+
+import { sortByPrice } from '../helpers/sortByPrice';
+import { sortByTime } from '../helpers/sortByTime';
+import { maxValuesStops } from '../helpers/maxValuesStops';
+
 const TicketBoard: React.FC = () => {
   const dispatch = useDispatch();
 
-  const sortByPrice = useSelector(
+  const queryParams = useQueryParams();
+  const querySortByPrice = queryParams.get('SortByPrice');
+  const querySortByTime = queryParams.get('SortByTime');
+
+  const stops = useSelector(
     (store: {
-      timeOrPriceReducer: { sortByPrice: boolean; sortByTime: boolean };
-    }) => store.timeOrPriceReducer.sortByPrice
+      stopsSortReducer: {
+        stops: {
+          selectAll: boolean;
+          choosedOption: { el: string };
+        };
+      };
+    }) => store.stopsSortReducer.stops
   );
 
   const searchId = useSelector(
@@ -37,19 +52,24 @@ const TicketBoard: React.FC = () => {
     }
   }, [dispatch, searchId, stop]);
 
-  sortByPrice
-    ? tickets?.sort((a: ITicket, b: ITicket) => a.price - b.price)
-    : tickets?.sort(
-        (a: ITicket, b: ITicket) =>
-          a.segments[0].duration +
-          a.segments[1].duration -
-          (b.segments[0].duration + b.segments[1].duration)
-      );
+  const filterByStops = tickets?.filter(
+    (el) =>
+      el.segments[0].stops.length <= maxValuesStops(stops.choosedOption) &&
+      el.segments[1].stops.length <= maxValuesStops(stops.choosedOption)
+  );
+
+  if (querySortByPrice) {
+    sortByPrice(filterByStops);
+  } else if (querySortByTime) {
+    sortByTime(filterByStops);
+  }
 
   return (
     <div>
-      {tickets?.length
-        ? tickets.map((ticket, index) => <Ticket key={index} {...ticket} />)
+      {filterByStops?.length
+        ? filterByStops.map((ticket, index) => (
+            <Ticket key={index} {...ticket} />
+          ))
         : null}
     </div>
   );

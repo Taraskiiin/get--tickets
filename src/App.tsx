@@ -14,24 +14,26 @@ import { GlobalStyle } from './styles/GlobalStyle';
 import { theme } from './styles/theme';
 
 const App = () => (
-  <ThemeProvider theme={theme}>
-    <Container>
-      <Reset />
-      <GlobalStyle />
-      <Row>
-        <Logo />
-      </Row>
-      <Row>
-        <Col sm={3}>
-          <NumberOfTransplants />
-        </Col>
-        <Col sm={9}>
-          <Filter />
-          <TicketBoard />
-        </Col>
-      </Row>
-    </Container>
-  </ThemeProvider>
+  <>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Reset />
+        <GlobalStyle />
+        <Row>
+          <Logo />
+        </Row>
+        <Row>
+          <Col sm={3}>
+            <NumberOfTransplants />
+          </Col>
+          <Col sm={9}>
+            <Filter />
+            <TicketBoard />
+          </Col>
+        </Row>
+      </Container>
+    </ThemeProvider>
+  </>
 );
 
 export default App;
