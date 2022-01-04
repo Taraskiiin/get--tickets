@@ -9,6 +9,7 @@ import { useQueryParams } from '../hooks/useQueryParams';
 
 import { sortByPrice } from '../helpers/sortByPrice';
 import { sortByTime } from '../helpers/sortByTime';
+import { maxValuesStops } from '../helpers/maxValuesStops';
 
 const TicketBoard: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,17 @@ const TicketBoard: React.FC = () => {
   const queryParams = useQueryParams();
   const querySortByPrice = queryParams.get('SortByPrice');
   const querySortByTime = queryParams.get('SortByTime');
+
+  const stops = useSelector(
+    (store: {
+      stopsSortReducer: {
+        stops: {
+          selectAll: boolean;
+          choosedOption: { el: string };
+        };
+      };
+    }) => store.stopsSortReducer.stops
+  );
 
   const searchId = useSelector(
     (store: { searchIdReducer: { searchId: string } }) =>
@@ -40,16 +52,24 @@ const TicketBoard: React.FC = () => {
     }
   }, [dispatch, searchId, stop]);
 
+  const filterByStops = tickets?.filter(
+    (el) =>
+      el.segments[0].stops.length <= maxValuesStops(stops.choosedOption) &&
+      el.segments[1].stops.length <= maxValuesStops(stops.choosedOption)
+  );
+
   if (querySortByPrice) {
-    sortByPrice(tickets);
+    sortByPrice(filterByStops);
   } else if (querySortByTime) {
-    sortByTime(tickets);
+    sortByTime(filterByStops);
   }
 
   return (
     <div>
-      {tickets?.length
-        ? tickets.map((ticket, index) => <Ticket key={index} {...ticket} />)
+      {filterByStops?.length
+        ? filterByStops.map((ticket, index) => (
+            <Ticket key={index} {...ticket} />
+          ))
         : null}
     </div>
   );

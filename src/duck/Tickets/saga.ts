@@ -6,7 +6,7 @@ import actionCreators from './action-creators';
 
 function* fetchTicketsIdWorker() {
   const searchId: string = yield select(getSearchId);
-  const URL = `https://front-test.beta.aviasales.ru/tickets?searchId${searchId}`;
+  const URL = `https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`;
   const data: { stop: boolean; tickets: ITicket } = yield call(
     async () => await fetchTicketsFromApi(URL)
   );
