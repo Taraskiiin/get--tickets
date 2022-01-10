@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 
 import Ticket, { ITicket } from './Ticket';
-import searchIdActionCreators from '../duck/SearchId/action-creators';
-import ticketsActionCreators from '../duck/Tickets/action-creators';
+import { fetchSearchIdCreator } from '../redux/duck/SearchId';
+import { fetchTicketsCreator } from '../redux/duck/Tickets';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useQueryParams } from '../hooks/useQueryParams';
 
-import { sortByPrice } from '../helpers/sortByPrice';
-import { sortByTime } from '../helpers/sortByTime';
-import { maxValuesStops } from '../helpers/maxValuesStops';
+import { sortByPrice } from '../helpers/helpers';
+import { sortByTime } from '../helpers/helpers';
+import { maxValuesStops } from '../helpers/helpers';
 
 const TicketBoard: React.FC = () => {
   const dispatch = useDispatch();
@@ -47,8 +47,8 @@ const TicketBoard: React.FC = () => {
   useEffect(() => {
     if (stop !== true) {
       searchId === ''
-        ? dispatch(searchIdActionCreators.fetchSearchIdCreator())
-        : dispatch(ticketsActionCreators.fetchTicketsCreator());
+        ? dispatch(fetchSearchIdCreator())
+        : dispatch(fetchTicketsCreator());
     }
   }, [dispatch, searchId, stop]);
 
@@ -66,11 +66,10 @@ const TicketBoard: React.FC = () => {
 
   return (
     <div>
-      {filterByStops?.length
-        ? filterByStops.map((ticket, index) => (
-            <Ticket key={index} {...ticket} />
-          ))
-        : null}
+      {filterByStops?.length > 0 &&
+        filterByStops.map((ticket, index) => (
+          <Ticket key={index} {...ticket} />
+        ))}
     </div>
   );
 };

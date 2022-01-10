@@ -8,7 +8,7 @@ import {
 } from '../styles/NumberOfTransplants';
 
 import { useDispatch, useSelector } from 'react-redux';
-import actionCreators from '../duck/StopsSort/action-creators';
+import { stopSortUpdateCreator } from '../redux/duck/StopsSort';
 
 const NumberOfTransplants = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const NumberOfTransplants = () => {
           choosedOption: stops.choosedOption,
         }}
         onSubmit={(values: { selectAll: boolean; choosedOption: {} }) => {
-          dispatch(actionCreators.stopSortUpdateCreator(values));
+          dispatch(stopSortUpdateCreator(values));
         }}
       >
         <FormStyled>
