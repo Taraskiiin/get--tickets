@@ -1,4 +1,5 @@
 import { takeEvery, put } from 'redux-saga/effects';
+import { FormValues } from '../../components/NumberOfTransplants';
 
 export const SET_STOPS = 'redux/duck/StopsSort/SET_STOPS';
 export const UPDATE_STOPS = 'redux/duck/StopsSort/UPDATE_STOPS';
@@ -15,14 +16,15 @@ export const stopSortUpdateCreator = (payload: {
   payload,
 });
 
+export const initialState = {
+  stops: { selectAll: true, choosedOption: ['0', '1', '2', '3'] },
+};
+
 export const stopsSortReducer = (
-  state = { stops: { selectAll: true, choosedOption: ['0', '1', '2', '3'] } },
+  state = initialState,
   action: {
     type: string;
-    payload: {
-      selectAll: boolean;
-      choosedOption: {};
-    };
+    payload: FormValues;
   }
 ) => {
   switch (action.type) {

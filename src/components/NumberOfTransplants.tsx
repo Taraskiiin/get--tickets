@@ -10,20 +10,22 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { stopSortUpdateCreator } from '../redux/duck/StopsSort';
 
-const NumberOfTransplants = () => {
+export interface FormValues {
+  selectAll: boolean;
+  choosedOption: string[];
+}
+
+const NumberOfTransplants: React.FC = () => {
   const dispatch = useDispatch();
   const stops = useSelector(
     (store: {
       stopsSortReducer: {
-        stops: {
-          selectAll: boolean;
-          choosedOption: {};
-        };
+        stops: FormValues;
       };
     }) => store.stopsSortReducer.stops
   );
   return (
-    <NumberOfTransplantsBlock>
+    <NumberOfTransplantsBlock data-testid="StopsFilterBlock">
       <TitleNumberOfTransplantsBlock>
         Количество пересадок
       </TitleNumberOfTransplantsBlock>
@@ -32,33 +34,53 @@ const NumberOfTransplants = () => {
           selectAll: stops.selectAll,
           choosedOption: stops.choosedOption,
         }}
-        onSubmit={(values: { selectAll: boolean; choosedOption: {} }) => {
+        onSubmit={(values: FormValues) => {
           dispatch(stopSortUpdateCreator(values));
         }}
       >
         <FormStyled>
           <label>
-            <Field type="checkbox" name="selectAll" />
+            <Field type="checkbox" name="selectAll" data-testid="all" />
             &nbsp;Все
           </label>
           <br />
           <label>
-            <Field type="checkbox" name="choosedOption" value="0" />
+            <Field
+              type="checkbox"
+              name="choosedOption"
+              data-testid="stops-0"
+              value="0"
+            />
             &nbsp;Без&nbsp;пересадок
           </label>
           <br />
           <label>
-            <Field type="checkbox" name="choosedOption" value="1" />
+            <Field
+              type="checkbox"
+              name="choosedOption"
+              data-testid="stops-1"
+              value="1"
+            />
             &nbsp;1&nbsp;пересадка
           </label>
           <br />
           <label>
-            <Field type="checkbox" name="choosedOption" value="2" />
+            <Field
+              type="checkbox"
+              name="choosedOption"
+              data-testid="stops-2"
+              value="2"
+            />
             &nbsp;2&nbsp;пересадки
           </label>
           <br />
           <label>
-            <Field type="checkbox" name="choosedOption" value="3" />
+            <Field
+              type="checkbox"
+              name="choosedOption"
+              data-testid="stops-3"
+              value="3"
+            />
             &nbsp;3&nbsp;пересадки
           </label>
           <br />
