@@ -25,7 +25,7 @@ const NumberOfTransplants: React.FC = () => {
     }) => store.stopsSortReducer.stops
   );
   return (
-    <NumberOfTransplantsBlock data-testid="StopsFilterBlock">
+    <NumberOfTransplantsBlock>
       <TitleNumberOfTransplantsBlock>
         Количество пересадок
       </TitleNumberOfTransplantsBlock>
@@ -40,47 +40,27 @@ const NumberOfTransplants: React.FC = () => {
       >
         <FormStyled>
           <label>
-            <Field type="checkbox" name="selectAll" data-testid="all" />
+            <Field type="checkbox" name="selectAll" />
             &nbsp;Все
           </label>
           <br />
           <label>
-            <Field
-              type="checkbox"
-              name="choosedOption"
-              data-testid="stops-0"
-              value="0"
-            />
+            <Field type="checkbox" name="choosedOption" value="0" />
             &nbsp;Без&nbsp;пересадок
           </label>
           <br />
           <label>
-            <Field
-              type="checkbox"
-              name="choosedOption"
-              data-testid="stops-1"
-              value="1"
-            />
+            <Field type="checkbox" name="choosedOption" value="1" />
             &nbsp;1&nbsp;пересадка
           </label>
           <br />
           <label>
-            <Field
-              type="checkbox"
-              name="choosedOption"
-              data-testid="stops-2"
-              value="2"
-            />
+            <Field type="checkbox" name="choosedOption" value="2" />
             &nbsp;2&nbsp;пересадки
           </label>
           <br />
           <label>
-            <Field
-              type="checkbox"
-              name="choosedOption"
-              data-testid="stops-3"
-              value="3"
-            />
+            <Field type="checkbox" name="choosedOption" value="3" />
             &nbsp;3&nbsp;пересадки
           </label>
           <br />

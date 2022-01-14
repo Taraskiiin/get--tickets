@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Ticket /> testing Should render with ThemeProvider 1`] = `
+<div
+  className="sc-bdvvtL juwDzc"
+>
+  <div
+    className="sc-gsDKAQ emeXrs"
+  >
+    <span
+      className="sc-gKclnd dKkrHJ"
+    >
+      20895
+       P
+    </span>
+    <span
+      className="sc-iCfMLu cYmdZd"
+    >
+      EK
+    </span>
+  </div>
+  <section
+    className="sc-dkPtRN ggcBqZ"
+  >
+    <p
+      className="sc-hKwDye dwqymA"
+    >
+      <span
+        className="sc-eCImPb ijgQPv"
+      >
+        MOW
+         - 
+        HKT
+      </span>
+      <span>
+        Jan 14th 22, 7:19
+      </span>
+    </p>
+    <p
+      className="sc-hKwDye dwqymA"
+    >
+      <span
+        className="sc-eCImPb ijgQPv"
+      >
+        В Пути
+      </span>
+      <span
+        className="sc-jRQBWg hgwUXy"
+      >
+        23Ч 53М
+      </span>
+    </p>
+    <p
+      className="sc-hKwDye dwqymA"
+    >
+      <span
+        className="sc-eCImPb ijgQPv"
+      >
+        Пересадки
+      </span>
+      <span>
+        DXB
+         
+      </span>
+      <span>
+        HKG
+         
+      </span>
+    </p>
+    <p
+      className="sc-hKwDye dwqymA"
+    >
+      <span
+        className="sc-eCImPb ijgQPv"
+      >
+        HKT
+         - 
+        MOW
+      </span>
+      <span>
+        Feb 3rd 22, 2:11
+      </span>
+    </p>
+    <p
+      className="sc-hKwDye dwqymA"
+    >
+      <span
+        className="sc-eCImPb ijgQPv"
+      >
+        В Пути
+      </span>
+      <span
+        className="sc-jRQBWg hgwUXy"
+      >
+        10Ч 39М
+      </span>
+    </p>
+    <p
+      className="sc-hKwDye dwqymA"
+    >
+      <span
+        className="sc-eCImPb ijgQPv"
+      >
+        Пересадки
+      </span>
+      <span>
+        HKG
+         
+      </span>
+      <span>
+        DXB
+         
+      </span>
+      <span>
+        AUH
+         
+      </span>
+    </p>
+  </section>
+</div>
+`;

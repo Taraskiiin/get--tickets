@@ -1,4 +1,9 @@
-import { getTime, maxValuesStops, sortByPrice, sortByTime } from './helpers';
+import {
+  getTime,
+  maxValuesStops,
+  sortByPrice,
+  sortByTime,
+} from '../helpers/helpers';
 
 const sortByTimeArray = [
   {
