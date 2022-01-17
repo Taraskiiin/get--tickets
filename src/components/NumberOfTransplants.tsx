@@ -1,29 +1,24 @@
 import React from 'react';
 import { Formik, Field } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
 import {
   NumberOfTransplantsBlock,
   TitleNumberOfTransplantsBlock,
   FormStyled,
 } from '../styles/NumberOfTransplants';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { stopSortUpdateCreator } from '../redux/duck/StopsSort';
-
-export interface FormValues {
-  selectAll: boolean;
-  choosedOption: string[];
-}
+import { useQueryParams } from '../hooks/useQueryParams';
 
 const NumberOfTransplants: React.FC = () => {
-  const dispatch = useDispatch();
-  const stops = useSelector(
-    (store: {
-      stopsSortReducer: {
-        stops: FormValues;
-      };
-    }) => store.stopsSortReducer.stops
-  );
+  const navigate = useNavigate();
+  const queryParams = useQueryParams();
+
+  const queryParamsState = {
+    querySortBy: queryParams.get('sortBy'),
+    queryPage: Number(queryParams.get('page')),
+    queryStops: queryParams.get('stops'),
+  };
+
   return (
     <NumberOfTransplantsBlock>
       <TitleNumberOfTransplantsBlock>
@@ -31,16 +26,17 @@ const NumberOfTransplants: React.FC = () => {
       </TitleNumberOfTransplantsBlock>
       <Formik
         initialValues={{
-          selectAll: stops.selectAll,
-          choosedOption: stops.choosedOption,
+          choosedOption: queryParamsState.queryStops,
         }}
-        onSubmit={(values: FormValues) => {
-          dispatch(stopSortUpdateCreator(values));
-        }}
+        onSubmit={(values: { choosedOption: string | null }) =>
+          navigate(
+            `?sortBy=${queryParamsState.querySortBy}&page=1&stops=${values.choosedOption}`
+          )
+        }
       >
         <FormStyled>
           <label>
-            <Field type="checkbox" name="selectAll" />
+            <Field type="checkbox" name="choosedOption" value="all" />
             &nbsp;Все
           </label>
           <br />

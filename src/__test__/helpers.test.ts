@@ -48,7 +48,7 @@ const sortByTimeArray = [
   },
 ];
 
-test('sort array by Time', () => {
+it('should give to us array sorted by time', () => {
   return expect(sortByTime(sortByTimeArray)).toBe(sortByTimeArray.reverse());
 });
 
@@ -95,14 +95,14 @@ const sortByPriceArray = [
   },
 ];
 
-test('sort array by Price', () => {
+it('should give to us array sorted by price', () => {
   return expect(sortByPrice(sortByPriceArray)).toBe(sortByPriceArray.reverse());
 });
 
-test('find max value in Object', () => {
+it('should give to us max value in object', () => {
   return expect(maxValuesStops({ el: '3' })).toBe(3);
 });
 
-test('find hours and minutes from minutes', () => {
+it('should convert minutes in hours', () => {
   expect(getTime(61)).toBe('1Ч 1М');
 });

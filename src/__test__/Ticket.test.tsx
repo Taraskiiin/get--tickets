@@ -1,6 +1,8 @@
 import React from 'react';
-import renderWith from './RenderWith';
+
 import Ticket from '../components/Ticket';
+
+import renderWith from './RenderWith';
 import { theme } from '../styles/theme';
 
 const propsToTicketsComponent = {
@@ -25,7 +27,7 @@ const propsToTicketsComponent = {
 };
 
 describe('Ticket /> testing', () => {
-  it('Should render with ThemeProvider', () => {
+  it('should match a snapshot', () => {
     expect(
       renderWith.withTheme(<Ticket {...propsToTicketsComponent} />, theme)
     ).toMatchSnapshot();

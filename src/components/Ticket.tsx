@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, memo } from 'react';
 import moment from 'moment';
 
 import { getTime } from '../helpers/helpers';
-
 import {
   Card,
   Header,
@@ -62,4 +61,4 @@ const Ticket: React.FC<ITicket> = (ticket) => (
   </Card>
 );
 
-export default Ticket;
+export default memo(Ticket);

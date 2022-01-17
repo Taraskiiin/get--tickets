@@ -1,9 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { ThemeProvider } from 'styled-components';
-import { ITheme } from '../styles/theme';
 import { BrowserRouter as Router } from 'react-router-dom';
+import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
+
+import { ITheme } from '../styles/theme';
 import { theme } from '../styles/theme';
 import store from '../redux/store';
 

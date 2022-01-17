@@ -1,10 +1,12 @@
 import React from 'react';
-import renderWith from './RenderWith';
+
 import Logo from '../components/Logo';
+
+import renderWith from './RenderWith';
 import { theme } from '../styles/theme';
 
 describe('<Logo /> testing', () => {
-  it('Should render with ThemeProvider', () => {
+  it('should match a snapshot', () => {
     expect(renderWith.withTheme(<Logo />, theme)).toMatchSnapshot();
   });
 });
