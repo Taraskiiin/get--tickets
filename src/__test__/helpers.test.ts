@@ -100,7 +100,7 @@ it('should give to us array sorted by price', () => {
 });
 
 it('should give to us max value in object', () => {
-  return expect(maxValuesStops({ el: '3' })).toBe(3);
+  return expect(maxValuesStops({ el: 'all' })).toBe('all');
 });
 
 it('should convert minutes in hours', () => {

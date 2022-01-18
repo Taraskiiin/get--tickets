@@ -1,23 +1,44 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import React from 'react';
-import { Formik, Field } from 'formik';
+import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
 import {
   NumberOfTransplantsBlock,
   TitleNumberOfTransplantsBlock,
   FormStyled,
+  CustomCheckbox,
+  SubmitBtn,
 } from '../styles/NumberOfTransplants';
 import { useQueryParams } from '../hooks/useQueryParams';
+import { maxValuesStops } from '../helpers/helpers';
 
 const NumberOfTransplants: React.FC = () => {
   const navigate = useNavigate();
   const queryParams = useQueryParams();
 
-  const queryParamsState = {
+  let queryParamsState = {
     querySortBy: queryParams.get('sortBy'),
     queryPage: Number(queryParams.get('page')),
     queryStops: queryParams.get('stops'),
   };
+  let initialState: string[] | null = [];
+
+  if (queryParamsState.queryStops === 'all') {
+    initialState = ['all', '0', '1', '2', '3'];
+  }
+  if (queryParamsState.queryStops === '0') {
+    initialState = ['0'];
+  }
+  if (queryParamsState.queryStops === '1') {
+    initialState = ['0', '1'];
+  }
+  if (queryParamsState.queryStops === '2') {
+    initialState = ['0', '1', '2'];
+  }
+  if (queryParamsState.queryStops === '3') {
+    initialState = ['0', '1', '2', '3'];
+  }
 
   return (
     <NumberOfTransplantsBlock>
@@ -25,42 +46,42 @@ const NumberOfTransplants: React.FC = () => {
         Количество пересадок
       </TitleNumberOfTransplantsBlock>
       <Formik
-        initialValues={{
-          choosedOption: queryParamsState.queryStops,
-        }}
-        onSubmit={(values: { choosedOption: string | null }) =>
+        initialValues={{ initialState }}
+        onSubmit={(values: { initialState: {} }) =>
           navigate(
-            `?sortBy=${queryParamsState.querySortBy}&page=1&stops=${values.choosedOption}`
+            `?sortBy=${
+              queryParamsState.querySortBy
+            }&page=1&stops=${maxValuesStops(values.initialState)}`
           )
         }
       >
         <FormStyled>
           <label>
-            <Field type="checkbox" name="choosedOption" value="all" />
+            <CustomCheckbox type="checkbox" name="initialState" value="all" />
             &nbsp;Все
           </label>
           <br />
           <label>
-            <Field type="checkbox" name="choosedOption" value="0" />
+            <CustomCheckbox type="checkbox" name="initialState" value="0" />
             &nbsp;Без&nbsp;пересадок
           </label>
           <br />
           <label>
-            <Field type="checkbox" name="choosedOption" value="1" />
+            <CustomCheckbox type="checkbox" name="initialState" value="1" />
             &nbsp;1&nbsp;пересадка
           </label>
           <br />
           <label>
-            <Field type="checkbox" name="choosedOption" value="2" />
+            <CustomCheckbox type="checkbox" name="initialState" value="2" />
             &nbsp;2&nbsp;пересадки
           </label>
           <br />
           <label>
-            <Field type="checkbox" name="choosedOption" value="3" />
+            <CustomCheckbox type="checkbox" name="initialState" value="3" />
             &nbsp;3&nbsp;пересадки
           </label>
           <br />
-          <button type="submit">Submit</button>
+          <SubmitBtn type="submit">применить</SubmitBtn>
         </FormStyled>
       </Formik>
     </NumberOfTransplantsBlock>

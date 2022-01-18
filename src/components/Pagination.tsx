@@ -23,12 +23,10 @@ const Pagination: React.FC<IPaginationProps> = ({
     <PaginationList>
       {pageNumbers.map((number) => (
         <Link
+          key={number}
           to={`?sortBy=${queryParamsState.querySortBy}&page=${number}&stops=${queryParamsState.queryStops}`}
         >
-          <PaginationItem
-            key={number}
-            active={queryParamsState.queryPage === number}
-          >
+          <PaginationItem active={queryParamsState.queryPage === number}>
             {number}
           </PaginationItem>
         </Link>

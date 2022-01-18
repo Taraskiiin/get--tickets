@@ -7,11 +7,15 @@ export const getTime = (minutes: number) => {
   return `${hour}Ч ${minute}М`;
 };
 
-export const maxValuesStops = (stops: { el: string }) => {
+export const maxValuesStops = (arr: {}) => {
   const numArray: number[] = [];
-  const array = Object.values(stops);
-  array.forEach((el) => numArray.push(parseInt(el)));
-  return numArray.reduce((a, b) => (a > b ? a : b));
+  const array = Object.values(arr);
+  if (array.includes('all')) {
+    return 'all';
+  } else {
+    array.forEach((element) => numArray.push(Number(element)));
+    return numArray.reduce((a, b) => (a > b ? a : b));
+  }
 };
 
 export const sortByPrice = (tickets: ITicket[]) =>
