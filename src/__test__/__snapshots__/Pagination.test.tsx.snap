@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pagination /> testing should match a snapshot 1`] = `
+<div
+  className="sc-bqiRlB joCZZ btn-group"
+  role="group"
+>
+  <a
+    aria-current="page"
+    className="sc-hBUSln jYefM active"
+    href="/?sortBy=price&page=1&stops=all"
+    onClick={[Function]}
+  >
+    <button
+      className="sc-ksdxgE cWtAlJ btn active btn-primary"
+      disabled={false}
+      type="button"
+    >
+      1
+    </button>
+  </a>
+  <a
+    aria-current="page"
+    className="sc-hBUSln jYefM active"
+    href="/?sortBy=price&page=2&stops=all"
+    onClick={[Function]}
+  >
+    <button
+      className="sc-ksdxgE cWtAlJ btn btn-primary"
+      disabled={false}
+      type="button"
+    >
+      2
+    </button>
+  </a>
+</div>
+`;

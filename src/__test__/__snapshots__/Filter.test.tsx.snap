@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Filter /> testing should match a snapshot 1`] = `
+<div
+  className="sc-bdvvtL lmfyqF me-2 btn-group"
+  role="group"
+>
+  <a
+    aria-current="page"
+    className="sc-gsDKAQ fNHwLb active"
+    href="/?sortBy=price&page=1&stops=null"
+    onClick={[Function]}
+  >
+    <button
+      className="sc-dkPtRN gdWSvs btn btn-primary"
+      disabled={false}
+      type="button"
+    >
+      Самый дешевый
+    </button>
+  </a>
+  <a
+    aria-current="page"
+    className="sc-gsDKAQ fNHwLb active"
+    href="/?sortBy=time&page=1&stops=null"
+    onClick={[Function]}
+  >
+    <button
+      className="sc-dkPtRN gdWSvs btn btn-primary"
+      disabled={false}
+      type="button"
+    >
+      Самый быстрый
+    </button>
+  </a>
+</div>
+`;

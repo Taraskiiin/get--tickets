@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 import { ThemeProvider } from 'styled-components';
 
 import { Filter, Logo, TicketBoard, NumberOfTransplants } from './components';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Reset } from 'styled-reset';
 

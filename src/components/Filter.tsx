@@ -1,21 +1,32 @@
 import React from 'react';
-import { Nav, StyledButton, Link } from '../styles/Filter';
 
 import { useQueryParams } from '../hooks/useQueryParams';
+import { Nav, StyledButton, Link } from '../styles/Filter';
 
-const Filter = () => {
+const Filter: React.FC = () => {
   const queryParams = useQueryParams();
 
-  const querySortByPrice = queryParams.get('SortByPrice');
-  const querySortByTime = queryParams.get('SortByTime');
+  const queryParamsState = {
+    querySortBy: queryParams.get('sortBy'),
+    queryPage: Number(queryParams.get('page')),
+    queryStops: queryParams.get('stops'),
+  };
 
   return (
     <Nav className="me-2">
-      <Link to="get--tickets/?SortByPrice=true">
-        <StyledButton active={querySortByPrice}>Самый дешевый</StyledButton>
+      <Link
+        to={`?sortBy=${'price'}&page=1&stops=${queryParamsState.queryStops}`}
+      >
+        <StyledButton active={queryParamsState.querySortBy === 'price'}>
+          Самый дешевый
+        </StyledButton>
       </Link>
-      <Link to="get--tickets/?SortByTime=true">
-        <StyledButton active={querySortByTime}>Самый быстрый</StyledButton>
+      <Link
+        to={`?sortBy=${'time'}&page=1&stops=${queryParamsState.queryStops}`}
+      >
+        <StyledButton active={queryParamsState.querySortBy === 'time'}>
+          Самый быстрый
+        </StyledButton>
       </Link>
     </Nav>
   );
