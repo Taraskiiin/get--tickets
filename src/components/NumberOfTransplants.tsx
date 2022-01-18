@@ -9,6 +9,7 @@ import {
   FormStyled,
   CustomCheckbox,
   SubmitBtn,
+  LabeltoCustomCheckbox,
 } from '../styles/NumberOfTransplants';
 import { useQueryParams } from '../hooks/useQueryParams';
 import { maxValuesStops } from '../helpers/helpers';
@@ -56,30 +57,30 @@ const NumberOfTransplants: React.FC = () => {
         }
       >
         <FormStyled>
-          <label>
+          <LabeltoCustomCheckbox>
             <CustomCheckbox type="checkbox" name="initialState" value="all" />
             &nbsp;Все
-          </label>
+          </LabeltoCustomCheckbox>
           <br />
-          <label>
+          <LabeltoCustomCheckbox>
             <CustomCheckbox type="checkbox" name="initialState" value="0" />
             &nbsp;Без&nbsp;пересадок
-          </label>
+          </LabeltoCustomCheckbox>
           <br />
-          <label>
+          <LabeltoCustomCheckbox>
             <CustomCheckbox type="checkbox" name="initialState" value="1" />
             &nbsp;1&nbsp;пересадка
-          </label>
+          </LabeltoCustomCheckbox>
           <br />
-          <label>
+          <LabeltoCustomCheckbox>
             <CustomCheckbox type="checkbox" name="initialState" value="2" />
             &nbsp;2&nbsp;пересадки
-          </label>
+          </LabeltoCustomCheckbox>
           <br />
-          <label>
+          <LabeltoCustomCheckbox>
             <CustomCheckbox type="checkbox" name="initialState" value="3" />
             &nbsp;3&nbsp;пересадки
-          </label>
+          </LabeltoCustomCheckbox>
           <br />
           <SubmitBtn type="submit">применить</SubmitBtn>
         </FormStyled>

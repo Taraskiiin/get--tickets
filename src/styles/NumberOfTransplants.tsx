@@ -66,6 +66,11 @@ export const CustomCheckbox = styled(Field)`
   }
 `;
 
+export const LabeltoCustomCheckbox = styled.label`
+  cursor: pointer;
+  color: ${(props) => props.theme.colors.codGray};
+`;
+
 export const SubmitBtn = styled(Button)`
 height: max-content;
   max-width: 20px 
