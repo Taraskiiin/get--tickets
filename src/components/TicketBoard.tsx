@@ -7,9 +7,9 @@ import Pagination from './Pagination';
 
 import { fetchSearchIdCreator } from '../redux/duck/SearchId';
 import { fetchTicketsCreator } from '../redux/duck/Tickets';
-import { sortByPrice } from '../helpers/helpers';
-import { sortByTime } from '../helpers/helpers';
+import { filterTicketsByStops, sortByPrice, sortByTime } from '../helpers/helpers';
 import { useQueryParams } from '../hooks/useQueryParams';
+import { QueryParams } from '../interface';
 
 const TicketBoard: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -18,9 +18,9 @@ const TicketBoard: React.FC = () => {
   const queryParams = useQueryParams();
 
   const queryParamsState = {
-    querySortBy: queryParams.get('sortBy'),
-    queryPage: Number(queryParams.get('page')),
-    queryStops: queryParams.get('stops'),
+    sortBy: queryParams.get('sortBy'),
+    page: Number(queryParams.get('page')),
+    stops: queryParams.get('stops'),
   };
 
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const TicketBoard: React.FC = () => {
     (store: { ticketsReducer: { tickets: ITicket[]; stop: boolean } }) =>
       store.ticketsReducer.stop
   );
-  let filterByStops = tickets;
+
   useEffect(() => {
     if (stop !== true) {
       searchId === ''
@@ -49,36 +49,32 @@ const TicketBoard: React.FC = () => {
     setLoading(false);
   }, [dispatch, searchId, stop]);
 
-  if (queryParamsState.queryStops && queryParamsState.queryStops === 'all') {
-    filterByStops = tickets?.filter(
-      (el) =>
-        el.segments[0].stops.length <= 3 && el.segments[1].stops.length <= 3
-    );
-  } else if (
-    queryParamsState.queryStops &&
-    queryParamsState.queryStops !== 'all'
-  ) {
-    filterByStops = tickets?.filter(
-      (el) =>
-        el.segments[0].stops.length <= Number(queryParamsState.queryStops) &&
-        el.segments[1].stops.length <= Number(queryParamsState.queryStops)
-    );
-  }
+  const maxStopsCount =
+    queryParamsState.stops === QueryParams.All
+      ? 3 // max available UI count of stops
+      : Number(queryParamsState.stops);
+
+  const filteredTicketsByStops =
+    filterTicketsByStops(tickets, maxStopsCount) ?? [];
+
   if (
-    queryParamsState.querySortBy &&
-    queryParamsState.querySortBy === 'price'
+    queryParamsState.sortBy &&
+    queryParamsState.sortBy === QueryParams.Price
   ) {
-    sortByPrice(filterByStops);
+    sortByPrice(filteredTicketsByStops);
   } else if (
-    queryParamsState.querySortBy &&
-    queryParamsState.querySortBy === 'time'
+    queryParamsState.sortBy &&
+    queryParamsState.sortBy === QueryParams.Time
   ) {
-    sortByTime(filterByStops);
+    sortByTime(filteredTicketsByStops);
   }
 
-  const lastTicketIndex = queryParamsState.queryPage * ticketsPerPage;
+  const lastTicketIndex = queryParamsState.page * ticketsPerPage;
   const firstTicketIndex = lastTicketIndex - ticketsPerPage;
-  const currentTicket = filterByStops.slice(firstTicketIndex, lastTicketIndex);
+  const currentTicket = filteredTicketsByStops.slice(
+    firstTicketIndex,
+    lastTicketIndex
+  );
 
   return (
     <div>
@@ -93,7 +89,7 @@ const TicketBoard: React.FC = () => {
       )}
       <Pagination
         ticketsPerPage={ticketsPerPage}
-        totalTickets={filterByStops.length}
+        totalTickets={filteredTicketsByStops.length}
         queryParamsState={queryParamsState}
       />
     </div>
