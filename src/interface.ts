@@ -1,6 +1,5 @@
-export interface IStopsState {
-  stops: {
-    selectAll: boolean;
-    choosedOption: string;
-  };
+export enum QueryParams {
+  All = 'all',
+  Price = 'price',
+  Time = 'time',
 }

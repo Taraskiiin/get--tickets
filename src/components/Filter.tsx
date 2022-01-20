@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useQueryParams } from '../hooks/useQueryParams';
+import { QueryParams } from '../interface';
 import { Nav, StyledButton, Link } from '../styles/Filter';
 
 const Filter: React.FC = () => {
@@ -15,16 +16,20 @@ const Filter: React.FC = () => {
   return (
     <Nav className="me-2">
       <Link
-        to={`?sortBy=${'price'}&page=1&stops=${queryParamsState.queryStops}`}
+        to={`?sortBy=${QueryParams.Price}&page=1&stops=${queryParamsState.queryStops}`}
       >
-        <StyledButton active={queryParamsState.querySortBy === 'price'}>
+        <StyledButton
+          active={queryParamsState.querySortBy === QueryParams.Price}
+        >
           Самый дешевый
         </StyledButton>
       </Link>
       <Link
-        to={`?sortBy=${'time'}&page=1&stops=${queryParamsState.queryStops}`}
+        to={`?sortBy=${QueryParams.Time}&page=1&stops=${queryParamsState.queryStops}`}
       >
-        <StyledButton active={queryParamsState.querySortBy === 'time'}>
+        <StyledButton
+          active={queryParamsState.querySortBy === QueryParams.Time}
+        >
           Самый быстрый
         </StyledButton>
       </Link>

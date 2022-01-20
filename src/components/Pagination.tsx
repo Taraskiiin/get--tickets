@@ -5,9 +5,9 @@ interface IPaginationProps {
   ticketsPerPage: number;
   totalTickets: number;
   queryParamsState: {
-    querySortBy: string | null;
-    queryPage: number;
-    queryStops: string | null;
+    sortBy: string | null;
+    page: number;
+    stops: string | null;
   };
 }
 const Pagination: React.FC<IPaginationProps> = ({
@@ -24,9 +24,9 @@ const Pagination: React.FC<IPaginationProps> = ({
       {pageNumbers.map((number) => (
         <Link
           key={number}
-          to={`?sortBy=${queryParamsState.querySortBy}&page=${number}&stops=${queryParamsState.queryStops}`}
+          to={`?sortBy=${queryParamsState.sortBy}&page=${number}&stops=${queryParamsState.stops}`}
         >
-          <PaginationItem active={queryParamsState.queryPage === number}>
+          <PaginationItem active={queryParamsState.page === number}>
             {number}
           </PaginationItem>
         </Link>

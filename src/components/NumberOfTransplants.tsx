@@ -12,34 +12,21 @@ import {
   LabeltoCustomCheckbox,
 } from '../styles/NumberOfTransplants';
 import { useQueryParams } from '../hooks/useQueryParams';
-import { maxValuesStops } from '../helpers/helpers';
+import { maxValuesStops, convertParamsToStateArray } from '../helpers/helpers';
 
 const NumberOfTransplants: React.FC = () => {
   const navigate = useNavigate();
   const queryParams = useQueryParams();
 
-  let queryParamsState = {
-    querySortBy: queryParams.get('sortBy'),
-    queryPage: Number(queryParams.get('page')),
-    queryStops: queryParams.get('stops'),
+  const queryParamsState = {
+    sortBy: queryParams.get('sortBy'),
+    page: Number(queryParams.get('page')),
+    stops: queryParams.get('stops'),
   };
-  let initialState: string[] | null = [];
 
-  if (queryParamsState.queryStops === 'all') {
-    initialState = ['all', '0', '1', '2', '3'];
-  }
-  if (queryParamsState.queryStops === '0') {
-    initialState = ['0'];
-  }
-  if (queryParamsState.queryStops === '1') {
-    initialState = ['0', '1'];
-  }
-  if (queryParamsState.queryStops === '2') {
-    initialState = ['0', '1', '2'];
-  }
-  if (queryParamsState.queryStops === '3') {
-    initialState = ['0', '1', '2', '3'];
-  }
+  let initialState: string[] = convertParamsToStateArray(
+    queryParamsState.stops
+  );
 
   return (
     <NumberOfTransplantsBlock>
@@ -50,9 +37,9 @@ const NumberOfTransplants: React.FC = () => {
         initialValues={{ initialState }}
         onSubmit={(values: { initialState: {} }) =>
           navigate(
-            `?sortBy=${
-              queryParamsState.querySortBy
-            }&page=1&stops=${maxValuesStops(values.initialState)}`
+            `?sortBy=${queryParamsState.sortBy}&page=1&stops=${maxValuesStops(
+              values.initialState
+            )}`
           )
         }
       >

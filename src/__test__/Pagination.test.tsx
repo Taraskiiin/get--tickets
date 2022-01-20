@@ -12,9 +12,9 @@ describe('<Pagination /> testing', () => {
           ticketsPerPage={5}
           totalTickets={10}
           queryParamsState={{
-            querySortBy: 'price',
-            queryPage: 1,
-            queryStops: 'all',
+            sortBy: 'price',
+            page: 1,
+            stops: 'all',
           }}
         />
       )
